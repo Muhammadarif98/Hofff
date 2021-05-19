@@ -10,8 +10,8 @@ import retrofit2.Response
 class Model : Imodel{
     var mRestService = ApiService.instance?.jsonApi
     override fun getBase(): Single<Response<Base?>?>? {
-         return mRestService?.getData()
-                ?.subscribeOn(Schedulers.io())
-                ?.observeOn(AndroidSchedulers.mainThread())
+         return mRestService?.getItem()
+             ?.subscribeOn(Schedulers.io())
+             ?.observeOn(AndroidSchedulers.mainThread())
     }
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Hofff</string>
+    <string name="ruble">%1$s ₽</string>
 </resources>

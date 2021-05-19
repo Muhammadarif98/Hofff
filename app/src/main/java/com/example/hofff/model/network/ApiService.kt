@@ -7,6 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 
+
 class ApiService private constructor() {
     private val retrofit: Retrofit
     private var BASE_URL = "https://hoff.ru/api/v2/"
