@@ -4,6 +4,7 @@ import Items
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.widget.RelativeLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,18 +19,21 @@ class MainActivity :  AppCompatActivity(), View {
     var myAdapter: MyAdapter? = MyAdapter()
     var mIpresenter: Ipresenter? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         mIpresenter = Presenter(this)
         val mRecyclerView: RecyclerView? = findViewById(R.id.recycler)
-        mRecyclerView?.setHasFixedSize(true)
+        var mReletive: RelativeLayout? = findViewById(R.id.relet)
+            mRecyclerView?.setHasFixedSize(true)
         mRecyclerView?.layoutManager = LinearLayoutManager(this)
 
         mRecyclerView?.setAdapter(myAdapter)
         mIpresenter?.loadData()
 
+       // mReletive.setOnClickListener()
 
     }
 
