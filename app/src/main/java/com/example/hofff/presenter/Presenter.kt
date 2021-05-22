@@ -1,6 +1,7 @@
 package com.example.hofff.presenter
 
 import Base
+import BaseInfo
 import android.util.Log
 import com.example.hofff.model.Imodel
 import com.example.hofff.model.Model
@@ -12,6 +13,7 @@ class Presenter(private val mView: View) :Ipresenter{
 
     private val model: Imodel = Model()
     private var mDisposable: Disposable? = null
+    private var mDisposableInfo: Disposable? = null
     override fun loadData() {
         mDisposable = model.getBase()
             ?.subscribe({ response: Response<Base?> ->
@@ -23,6 +25,19 @@ class Presenter(private val mView: View) :Ipresenter{
             mView.showError("Упс! Что то пошло не так")
             Log.d("TAG", "onError =$e")
         }
+    }
+
+    override fun loadDataInfo() {
+        mDisposableInfo = model.getBaseInfo()
+            ?.subscribe({ response: Response<BaseInfo?> ->
+                if (response.isSuccessful && response.body() != null) {
+                    val body = response.body()
+                    mView.showDataInfo(body!!.itemsInfo)
+                }
+            } as ((Response<BaseInfo?>?) -> Unit)?) { e: Throwable ->
+                mView.showError("Упс! Что то пошло не так")
+                Log.d("TAG", "onError =$e")
+            }
     }
 
     override fun onStop() {

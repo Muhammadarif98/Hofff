@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginHorizontal="16dp">
+    <RelativeLayout
+        android:id="@+id/relet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:focusable="true"
+        android:clickable="true">
+
+<ImageView
+    android:id="@+id/order_iv"
+    android:layout_width="64dp"
+    android:layout_height="40dp"
+    android:src="@drawable/ic_next">
+
+</ImageView>
+        <TextView
+            android:id="@+id/name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_toEndOf="@+id/order_iv"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            tools:text="Поднос BERKRAFT Panda"
+            />
+
+        <TextView
+            android:id="@+id/articul_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="6dp"
+            android:layout_below="@+id/name_tv"
+            android:textSize="12sp"
+            android:layout_toEndOf="@+id/order_iv"
+            tools:text="80304912" />
+        <TextView
+            android:id="@+id/price_info_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_below="@+id/articul_tv"
+            android:layout_toEndOf="@+id/order_iv"
+            android:textSize="14sp"
+            tools:text="84 498 ₽"
+            android:textColor="@color/black"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/quantity_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_below="@+id/articul_tv"
+            android:layout_marginStart="40dp"
+            android:layout_toEndOf="@+id/price_info_tv"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            tools:text="1 шт"
+            android:layout_marginTop="16dp"/>
+
+        <ImageView
+
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/articul_tv"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/order"
+
+            />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

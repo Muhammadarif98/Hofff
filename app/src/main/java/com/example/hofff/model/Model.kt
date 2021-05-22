@@ -1,6 +1,7 @@
 package com.example.hofff.model
 
 import Base
+import BaseInfo
 import com.example.hofff.model.network.ApiService
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,5 +14,12 @@ class Model : Imodel{
          return mRestService?.getItem()
              ?.subscribeOn(Schedulers.io())
              ?.observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getBaseInfo(): Single<Response<BaseInfo?>?>? {
+        return mRestService?.getItemInfo()
+            ?.subscribeOn(Schedulers.io())
+            ?.observeOn(AndroidSchedulers.mainThread())
+
     }
 }
