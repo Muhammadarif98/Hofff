@@ -25,7 +25,7 @@ class MyHolderInfo (itemView: View) : RecyclerView.ViewHolder(itemView){
     init {
         mDelivery = itemView.findViewById(R.id.order_iv)
         mDeliveryT = itemView.findViewById(R.id.name_tv)
-        mPayment = itemView.findViewById(R.id.payment_tv)
+//        mPayment = itemView.findViewById(R.id.payment_tv)
         mStatus = itemView.findViewById(R.id.articul_tv)
         mPrice = itemView.findViewById(R.id.price_info_tv)
         mData = itemView.findViewById(R.id.quantity_tv)

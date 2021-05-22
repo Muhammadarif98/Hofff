@@ -28,7 +28,7 @@ class Presenter(private val mView: View) :Ipresenter{
     }
 
     override fun loadDataInfo() {
-        mDisposableInfo = model.getBaseInfo()
+        mDisposableInfo= model.getBaseInfo()
             ?.subscribe({ response: Response<BaseInfo?> ->
                 if (response.isSuccessful && response.body() != null) {
                     val body = response.body()
@@ -36,7 +36,7 @@ class Presenter(private val mView: View) :Ipresenter{
                 }
             } as ((Response<BaseInfo?>?) -> Unit)?) { e: Throwable ->
                 mView.showError("Упс! Что то пошло не так")
-                Log.d("TAG", "onError =$e")
+                Log.d("TAG2", "onError =$e")
             }
     }
 

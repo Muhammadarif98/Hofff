@@ -30,16 +30,21 @@ class MainActivity :  AppCompatActivity(), View {
         setContentView(R.layout.activity_info)
 
         mIpresenter = Presenter(this)
-        val mRecyclerView: RecyclerView? = findViewById(R.id.recycler)
-        val mRecyclerViewInfo: RecyclerView? = findViewById(R.id.items_list_rv)
-            mRecyclerView?.setHasFixedSize(true)
-        mRecyclerView?.layoutManager = LinearLayoutManager(this)
 
+        val mRecyclerView: RecyclerView? = findViewById(R.id.recycler)
+        mRecyclerView?.setHasFixedSize(true)
+        mRecyclerView?.layoutManager = LinearLayoutManager(this)
         mRecyclerView?.adapter = myAdapter
+
+        val mRecyclerViewInfo: RecyclerView? = findViewById(R.id.items_list_rv)
         mRecyclerViewInfo?.setHasFixedSize(true)
         mRecyclerViewInfo?.layoutManager = LinearLayoutManager(this)
-
         mRecyclerViewInfo?.adapter = myAdapterInfo
+
+
+
+
+
 
         mIpresenter?.loadData()
         mIpresenter?.loadDataInfo()

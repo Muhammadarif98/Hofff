@@ -6,7 +6,7 @@ data class BaseInfo (
 
 	@SerializedName("address") val address : String,
 	@SerializedName("payment") val payment : Payment,
-	@SerializedName("bonusCard") val bonusCard : Int,
+	@SerializedName("bonusCard") val bonusCard : String,
 	@SerializedName("totalItemCount") val totalItemCount : Int,
 	@SerializedName("items") val itemsInfo : List<ItemsInfo>,
 	@SerializedName("services") val services : List<Services>,
