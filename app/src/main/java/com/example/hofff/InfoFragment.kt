@@ -1,10 +1,17 @@
 package com.example.hofff
 
+import Items
+import ItemsInfo
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.hofff.presenter.Ipresenter
+import com.example.hofff.presenter.Presenter
+import com.example.hofff.view.adapters.MyAdapterInfo
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -16,10 +23,13 @@ private const val ARG_PARAM2 = "param2"
  * Use the [InfoFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class InfoFragment : Fragment() {
+class InfoFragment : Fragment() , com.example.hofff.view.View{
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private var myAdapterInfo: MyAdapterInfo? = MyAdapterInfo()
+    var mIpresenter: Ipresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +43,15 @@ class InfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        mIpresenter?.loadDataInfo()
+        mIpresenter = Presenter(this)
+
+        val mRecyclerViewInfo: RecyclerView? = view?.findViewById(R.id.items_list_rv)
+        mRecyclerViewInfo?.setHasFixedSize(true)
+        mRecyclerViewInfo?.layoutManager = LinearLayoutManager(context)
+        mRecyclerViewInfo?.adapter = myAdapterInfo
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_info, container, false)
     }
@@ -55,5 +74,17 @@ class InfoFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun showData(list: List<Items>?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showDataInfo(list: List<ItemsInfo>?) {
+        myAdapterInfo?.addItems(list)
+    }
+
+    override fun showError(error: String?) {
+        TODO("Not yet implemented")
     }
 }
