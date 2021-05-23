@@ -1,5 +1,6 @@
 package com.example.hofff.view.adapters
 
+import Base
 import Items
 
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ class MyAdapter : RecyclerView.Adapter<MyHolder>() {
         this.models.addAll(models!!)
         notifyDataSetChanged()
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list, null)

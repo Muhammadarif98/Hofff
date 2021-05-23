@@ -16,6 +16,8 @@ class Presenter(private val mView: View) :Ipresenter{
     private var mDisposableInfo: Disposable? = null
     override fun loadData() {
         mDisposable = model.getBase()
+            ?.doOnSubscribe { disposable: Disposable? -> mView.showProgress() }
+            ?.doAfterSuccess { exampleResponse: Response<Base?>? -> mView.hideProgress() }
             ?.subscribe({ response: Response<Base?> ->
             if (response.isSuccessful && response.body() != null) {
                 val body = response.body()
@@ -29,6 +31,8 @@ class Presenter(private val mView: View) :Ipresenter{
 
     override fun loadDataInfo() {
         mDisposableInfo= model.getBaseInfo()
+            ?.doOnSubscribe { disposable: Disposable? -> mView.showProgress() }
+            ?.doAfterSuccess { exampleResponse: Response<BaseInfo?>? -> mView.hideProgress() }
             ?.subscribe({ response: Response<BaseInfo?> ->
                 if (response.isSuccessful && response.body() != null) {
                     val body = response.body()

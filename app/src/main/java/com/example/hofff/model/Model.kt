@@ -22,4 +22,5 @@ class Model : Imodel{
             ?.observeOn(AndroidSchedulers.mainThread())
 
     }
+
 }

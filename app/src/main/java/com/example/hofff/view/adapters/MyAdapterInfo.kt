@@ -12,10 +12,15 @@ import java.util.*
 
 class MyAdapterInfo : RecyclerView.Adapter<MyHolderInfo>() {
     var models: MutableList<ItemsInfo> = ArrayList()
+    var base: MutableList<BaseInfo> = ArrayList()
     private val isLoadingAdded = false
 
     fun addItems(models: List<ItemsInfo>?) {
         this.models.addAll(models!!)
+        notifyDataSetChanged()
+    }
+    fun addItem(base:List<BaseInfo>?){
+        this.base.addAll(base!!)
         notifyDataSetChanged()
     }
 
@@ -26,6 +31,7 @@ class MyAdapterInfo : RecyclerView.Adapter<MyHolderInfo>() {
 
     override fun onBindViewHolder(holder: MyHolderInfo, position: Int) {
         holder.bind(models[position])
+        holder.bindInfo(base[position])
     }
 
     override fun getItemCount(): Int {

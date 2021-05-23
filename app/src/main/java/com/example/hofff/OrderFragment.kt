@@ -19,7 +19,7 @@ import com.example.hofff.view.adapters.MyAdapterInfo
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class OrderFragment : com.example.hofff.view.View , Fragment()  {
+class OrderFragment : Fragment()  {
 
     private var param1: String? = null
     private var param2: String? = null
@@ -42,7 +42,7 @@ class OrderFragment : com.example.hofff.view.View , Fragment()  {
     ): View? {
 
         mIpresenter?.loadData()
-        mIpresenter = Presenter(this)
+      //  mIpresenter = Presenter(this)
         val mRecyclerView: RecyclerView? = view?.findViewById(R.id.recycler)
         mRecyclerView?.setHasFixedSize(true)
         mRecyclerView?.layoutManager = LinearLayoutManager(context)
@@ -65,16 +65,16 @@ class OrderFragment : com.example.hofff.view.View , Fragment()  {
             }
     }
 
-    override fun showData(list: List<Items>?) {
-        myAdapter?.addItems(list)
-    }
+//    override fun showData(list: List<Items>?) {
+//        myAdapter?.addItems(list)
+//    }
 
-    override fun showDataInfo(list: List<ItemsInfo>?) {
-        TODO("Not yet implemented")
-    }
-
-
-    override fun showError(error: String?) {
-        TODO("Not yet implemented")
-    }
+//    override fun showDataInfo(list: List<ItemsInfo>?) {
+//        TODO("Not yet implemented")
+//    }
+//
+//
+//    override fun showError(error: String?) {
+//        TODO("Not yet implemented")
+//    }
 }

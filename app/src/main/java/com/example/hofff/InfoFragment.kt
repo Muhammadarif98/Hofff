@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hofff.presenter.Ipresenter
@@ -30,6 +31,7 @@ class InfoFragment : Fragment() , com.example.hofff.view.View{
 
     private var myAdapterInfo: MyAdapterInfo? = MyAdapterInfo()
     var mIpresenter: Ipresenter? = null
+    private val mProgressBar: ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +45,6 @@ class InfoFragment : Fragment() , com.example.hofff.view.View{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         mIpresenter?.loadDataInfo()
         mIpresenter = Presenter(this)
 
@@ -86,5 +87,19 @@ class InfoFragment : Fragment() , com.example.hofff.view.View{
 
     override fun showError(error: String?) {
         TODO("Not yet implemented")
+    }
+
+    override fun showProgress(): Boolean {
+        if (mProgressBar != null) {
+            mProgressBar.setVisibility(android.view.View.VISIBLE)
+        }
+        return true
+    }
+
+    override fun hideProgress(): Boolean {
+        if (mProgressBar != null) {
+            mProgressBar.setVisibility(android.view.View.GONE)
+        }
+        return true
     }
 }
