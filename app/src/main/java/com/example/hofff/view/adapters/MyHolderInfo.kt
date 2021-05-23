@@ -21,13 +21,7 @@ class MyHolderInfo (itemView: View) : RecyclerView.ViewHolder(itemView){
     var mPrice: TextView
     var mData: TextView
 
-    var mAdress: TextView
-    lateinit var mBonusCard: TextView
-    lateinit var mBonus: TextView
-    lateinit var mDiscount: TextView
-    lateinit var mTotal: TextView
-    lateinit var mTotalCount: TextView
-    lateinit var mPayment: TextView
+
 
 
     init {
@@ -36,13 +30,7 @@ class MyHolderInfo (itemView: View) : RecyclerView.ViewHolder(itemView){
         mStatus = itemView.findViewById(R.id.articul_tv)
         mPrice = itemView.findViewById(R.id.price_info_tv)
         mData = itemView.findViewById(R.id.quantity_tv)
-        mTotalCount = itemView.findViewById(R.id.items_count_tv)
-        mPayment = itemView.findViewById(R.id.payment_tv)
-        mAdress = itemView.findViewById(R.id.address_tv)
-        mBonusCard = itemView.findViewById(R.id.bonus_card_tv)
-        mBonus = itemView.findViewById(R.id.bonuses_tv)
-        mDiscount = itemView.findViewById(R.id.discount_tv)
-        mTotal = itemView.findViewById(R.id.total_sum_tv)
+
     }
 
     fun bind(model: ItemsInfo){
@@ -53,15 +41,7 @@ class MyHolderInfo (itemView: View) : RecyclerView.ViewHolder(itemView){
         mPrice.text = mPrice.context.getString(R.string.ruble, model.price.toString())
     }
 
-    fun bindInfo(base:BaseInfo){
-        mPayment.text = base.payment.payment
-        mAdress.text = base.address
-        mBonusCard.text = base.bonusCard
-        mBonus.text = base.amount.bonuses.toString()
-        mDiscount.text = base.amount.discount.toString()
-        mTotal.text = base.amount.total.toString()
-        mTotalCount.text = mTotalCount.context.getString(R.string.total,base.totalItemCount.toString())
-    }
+
 
 
 

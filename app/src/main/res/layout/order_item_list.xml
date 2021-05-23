@@ -66,18 +66,18 @@
             tools:text="84 498 ₽" />
 
         <ImageView
-            android:id="@+id/us"
+            android:id="@+id/usg"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_below="@+id/price_info_tv"
             android:layout_marginTop="16dp"
-            android:layout_toStartOf="@id/uslu"
+            android:layout_toStartOf="@id/uslug"
             android:src="@drawable/ic_uslu">
 
         </ImageView>
 
         <TextView
-            android:id="@+id/uslu"
+            android:id="@+id/uslug"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/price_info_tv"

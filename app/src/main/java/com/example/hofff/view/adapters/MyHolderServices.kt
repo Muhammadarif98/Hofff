@@ -18,9 +18,9 @@ class MyHolderServices (itemView: View) : RecyclerView.ViewHolder(itemView){
 
 
     init {
-        mDelivery = itemView.findViewById(R.id.delivery_iv)
-        mDeliveryT = itemView.findViewById(R.id.delivery_tv)
-        mPrice = itemView.findViewById(R.id.price_tv)
+        mDelivery = itemView.findViewById(R.id.us)
+        mDeliveryT = itemView.findViewById(R.id.uslu)
+        mPrice = itemView.findViewById(R.id.price_info_tv)
 
     }
 

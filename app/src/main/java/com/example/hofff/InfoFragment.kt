@@ -2,6 +2,7 @@ package com.example.hofff
 
 import Items
 import ItemsInfo
+import Services
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -83,6 +84,10 @@ class InfoFragment : Fragment() , com.example.hofff.view.View{
 
     override fun showDataInfo(list: List<ItemsInfo>?) {
         myAdapterInfo?.addItems(list)
+    }
+
+    override fun showDataService(list: List<Services>?) {
+        TODO("Not yet implemented")
     }
 
     override fun showError(error: String?) {
