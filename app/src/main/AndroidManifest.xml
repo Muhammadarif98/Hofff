@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Hofff">
-        <activity android:name=".view.InfoActivity"></activity>
-        <activity android:name=".view.MainActivity">
+        <activity android:name="com.example.hofff.main.mvp.view.InfoActivity"></activity>
+        <activity android:name="com.example.hofff.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
