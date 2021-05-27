@@ -1,17 +1,15 @@
 package com.example.hofff.main.mvp.model.data
 
-import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+import java.util.*
 
 
-
-
-data class Items (
-
-	@SerializedName("id") val id : Int,
-	@SerializedName("number") val number : String,
-	@SerializedName("datetime") val datetime : Int,
-	@SerializedName("status") val status : Status,
-	@SerializedName("delivery") val delivery : Delivery,
-	@SerializedName("phone") val phone : String,
-	@SerializedName("sum") val sum : Int
-)
+data class Items(
+	val date: Date,
+	val delivery: Delivery,
+	val status: Status,
+	val id: String,
+	val number: String,
+	val phone: String,
+	val sum: Int
+): Serializable

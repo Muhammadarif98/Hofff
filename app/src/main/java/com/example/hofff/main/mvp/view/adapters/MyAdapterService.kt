@@ -10,7 +10,6 @@ import java.util.*
 
 class MyAdapterService : RecyclerView.Adapter<MyHolderServices>() {
     var models: MutableList<Services> = ArrayList()
-    private val isLoadingAdded = false
 
     fun addItems(models: List<Services>?) {
         this.models.addAll(models!!)

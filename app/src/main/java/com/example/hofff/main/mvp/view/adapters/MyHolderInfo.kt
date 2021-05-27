@@ -10,23 +10,12 @@ import com.example.hofff.R
 
 class MyHolderInfo (itemView: View) : RecyclerView.ViewHolder(itemView){
 
-    var mDelivery: ImageView
-    var mDeliveryT: TextView
-    var mStatus: TextView
-    var mPrice: TextView
-    var mData: TextView
+    var mDelivery: ImageView = itemView.findViewById(R.id.order_iv)
+    var mDeliveryT: TextView = itemView.findViewById(R.id.name_tv)
+    var mStatus: TextView = itemView.findViewById(R.id.articul_tv)
+    var mPrice: TextView = itemView.findViewById(R.id.price_info_tv)
+    var mData: TextView = itemView.findViewById(R.id.quantity_tv)
 
-
-
-
-    init {
-        mDelivery = itemView.findViewById(R.id.order_iv)
-        mDeliveryT = itemView.findViewById(R.id.name_tv)
-        mStatus = itemView.findViewById(R.id.articul_tv)
-        mPrice = itemView.findViewById(R.id.price_info_tv)
-        mData = itemView.findViewById(R.id.quantity_tv)
-
-    }
 
     fun bind(model: ItemsInfo){
         mDeliveryT.text = model.name

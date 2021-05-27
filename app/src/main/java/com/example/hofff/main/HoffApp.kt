@@ -4,23 +4,22 @@ import android.app.Application
 import com.example.hofff.main.dagger.ApplicationComponent
 import com.example.hofff.main.dagger.DaggerApplicationComponent
 
-import com.github.terrakok.cicerone.Cicerone
-
-
 
 class HoffApp : Application() {
 
+    val appComponent : ApplicationComponent = DaggerApplicationComponent.create()
 
-  val appComponent : ApplicationComponent = DaggerApplicationComponent.create()
 
     override fun onCreate() {
-        super.onCreate()
         INSTANCE = this
+        super.onCreate()
+
     }
 
     companion object {
-        lateinit var INSTANCE: HoffApp
-        private set
+        lateinit var INSTANCE : HoffApp
+            private set
     }
+
 
 }

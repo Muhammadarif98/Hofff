@@ -11,7 +11,6 @@ import java.util.*
 class MyAdapterInfo : RecyclerView.Adapter<MyHolderInfo>() {
     var models: MutableList<ItemsInfo> = ArrayList()
 
-    private val isLoadingAdded = false
 
     fun addItems(models: List<ItemsInfo>) {
         this.models.addAll(models!!)

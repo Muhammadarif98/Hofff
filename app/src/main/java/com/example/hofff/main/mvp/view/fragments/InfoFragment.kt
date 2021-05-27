@@ -1,85 +1,77 @@
 package com.example.hofff.main.mvp.view.fragments
 
-import com.example.hofff.main.mvp.model.data.Items
-import com.example.hofff.main.mvp.model.data.ItemsInfo
-import com.example.hofff.main.mvp.model.data.Services
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.hofff.R
-import com.example.hofff.main.mvp.presenter.Ipresenter
-import com.example.hofff.main.mvp.presenter.Presenter
+import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.example.hofff.main.mvp.model.data.format
+import com.example.hofff.databinding.FragmentInfoBinding
+import com.example.hofff.main.HoffApp
+import com.example.hofff.main.mvp.model.data.*
+import com.example.hofff.main.mvp.presenter.PresenterInfo
+import com.example.hofff.main.mvp.view.activities.MainActivity
 import com.example.hofff.main.mvp.view.adapters.MyAdapterInfo
 import com.example.hofff.main.mvp.view.adapters.MyAdapterService
+import com.example.hofff.main.mvp.view.ViewInfo
+import com.github.terrakok.cicerone.Router
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [InfoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class InfoFragment : Fragment() , com.example.hofff.view.View {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+class InfoFragment : MvpAppCompatFragment(), ViewInfo {
+    private var _binding: FragmentInfoBinding? = null
+    private val binding: FragmentInfoBinding get() = _binding!!
     private var myAdapterInfo: MyAdapterInfo? = MyAdapterInfo()
     private var myAdapterServices: MyAdapterService = MyAdapterService()
-    var mIpresenter: Ipresenter? = null
-    private val mProgressBar: ProgressBar? = null
+
+    @Inject
+    @InjectPresenter
+    lateinit var presenter: PresenterInfo
+
+    @Inject
+    lateinit var router: Router
+
+    @ProvidePresenter
+    fun providePresenter() = presenter
+
+    lateinit var items: Items
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+        HoffApp.INSTANCE.appComponent.inject(this)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        mIpresenter?.loadDataInfo()
-        mIpresenter = Presenter(this)
+    ): View? { _binding = FragmentInfoBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val mRecyclerViewInfo: RecyclerView? = view?.findViewById(R.id.items_list_rv)
-        mRecyclerViewInfo?.setHasFixedSize(true)
-        mRecyclerViewInfo?.layoutManager = LinearLayoutManager(context)
-        mRecyclerViewInfo?.adapter = myAdapterInfo
 
-        val mRecyclerViewService: RecyclerView? = view?.findViewById(R.id.services_recycler)
-        mRecyclerViewService?.setHasFixedSize(true)
-        mRecyclerViewService?.layoutManager = LinearLayoutManager(context)
-        mRecyclerViewService?.adapter = myAdapterServices
+        (requireActivity() as MainActivity).updateTitle(items.number)
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_info, container, false)
+        presenter.loadOrderInfo(items.id)
+
+        val dividerItemDecoration = DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
+
+        binding.servicesRecycler.addItemDecoration(dividerItemDecoration)
+        binding.servicesRecycler.adapter = myAdapterServices
+
+        binding.itemsListRv.addItemDecoration(dividerItemDecoration)
+        binding.itemsListRv.adapter = myAdapterInfo
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            InfoFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 
-    override fun showData(list: List<Items>) {
-      //  TODO("Not yet implemented")
-    }
+
 
     override fun showDataInfo(list: List<ItemsInfo>) {
         myAdapterInfo?.addItems(list)
@@ -89,21 +81,65 @@ class InfoFragment : Fragment() , com.example.hofff.view.View {
         myAdapterServices?.addItems(list)
     }
 
+    override fun showContent() {
+        binding.orderInfoContent.visibility = View.VISIBLE
+    }
+
+    override fun showTopOrderInfo() {
+        binding.orderDateTv.text = items.date.format()
+        binding.statusTv.text = items.status.name
+        binding.deliveryTv.text = items.delivery.name
+    }
+
+    override fun showDeliveryTime(deliveryTime: DeliveryTime) {
+        binding.deliveryDateTv.text = deliveryTime.data
+        binding.deliveryTimeTv.text = deliveryTime.data
+    }
+
+    override fun showAddress(address: String) {
+        if (items.delivery.name.contains("Самовывоз")) {
+            binding.addressTitleTv.text = "Адрес пункта выдачи"
+            binding.addressTv.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.holo_blue_dark))
+        }
+
+        binding.addressTv.text = address
+    }
+
+    override fun showOtherCenterInfo(itemsInfo: BaseInfo) {
+        binding.paymentTv.text = itemsInfo.payment.payment.orEmpty()
+        binding.bonusCardTv.text = itemsInfo.bonusCard
+        binding.shopTv.text = itemsInfo.shop.name.orEmpty()
+    }
+
+    override fun showOrderSum(amount: Amount) {
+        if (amount.bonuses != 0) {
+            binding.bonusesLl.visibility = View.VISIBLE
+            binding.bonusesTv.text = amount.bonuses.toString()
+        }
+
+        if (amount.discount != 0) {
+            binding.discountLl.visibility = View.VISIBLE
+            binding.discountTv.text = amount.discount.toString()
+        }
+
+        binding.totalSumTv.text = amount.total.toString()
+    }
+
     override fun showError(error: String?) {
-       // TODO("Not yet implemented")
+        Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
     }
 
     override fun showProgress(): Boolean {
-        if (mProgressBar != null) {
-            mProgressBar.setVisibility(android.view.View.VISIBLE)
-        }
+        binding.loadingPb.visibility = View.VISIBLE
         return true
     }
 
     override fun hideProgress(): Boolean {
-        if (mProgressBar != null) {
-            mProgressBar.setVisibility(android.view.View.GONE)
-        }
+        binding.loadingPb.visibility = View.GONE
         return true
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

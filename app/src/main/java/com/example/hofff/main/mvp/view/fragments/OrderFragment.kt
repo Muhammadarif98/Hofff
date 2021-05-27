@@ -1,92 +1,93 @@
 package com.example.hofff.main.mvp.view.fragments
 
 import com.example.hofff.main.mvp.model.data.Items
-import com.example.hofff.main.mvp.model.data.ItemsInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.hofff.R
-import com.example.hofff.main.mvp.model.data.Services
-import com.example.hofff.main.mvp.presenter.Ipresenter
-import com.example.hofff.main.mvp.presenter.Presenter
+import android.widget.Toast
+import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.example.hofff.databinding.FragmentOrderBinding
+import com.example.hofff.main.HoffApp
+import com.example.hofff.main.Screen
+import com.example.hofff.main.mvp.presenter.PresenterOrder
+import com.example.hofff.main.mvp.view.activities.MainActivity
 import com.example.hofff.main.mvp.view.adapters.MyAdapter
+import com.example.hofff.main.mvp.view.ViewOrder
+import com.github.terrakok.cicerone.Router
+import javax.inject.Inject
 
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class OrderFragment : MvpAppCompatFragment(), ViewOrder,MyAdapter.OrderSelectListener{
 
-class OrderFragment : Fragment(), com.example.hofff.view.View {
+    private var _binding: FragmentOrderBinding? = null
+    private val binding: FragmentOrderBinding get() = _binding!!
 
-    private var param1: String? = null
-    private var param2: String? = null
+    private val myAdapter = MyAdapter(this)
 
 
-    private var myAdapter: MyAdapter? = MyAdapter()
-    var mIpresenter: Ipresenter? = null
+    @Inject
+    @InjectPresenter
+    lateinit var presenter: PresenterOrder
+
+    @ProvidePresenter
+    fun providePresenter() = presenter
+
+    @Inject
+    lateinit var router: Router
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+        HoffApp.INSTANCE.appComponent.inject(this)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View? { _binding = FragmentOrderBinding.inflate(inflater, container, false)
+        return binding.root
 
-        mIpresenter?.loadData()
-        mIpresenter = Presenter(this)
-        val mRecyclerView: RecyclerView? = view?.findViewById(R.id.recycler)
-        mRecyclerView?.setHasFixedSize(true)
-        mRecyclerView?.layoutManager = LinearLayoutManager(context)
-        mRecyclerView?.adapter = myAdapter
-
-
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order, container, false)
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    companion object {
+        (requireActivity() as MainActivity).updateTitle("Мои заказы")
 
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            OrderFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        binding.recycler.adapter = myAdapter
+
+        if (myAdapter.itemCount == 0)
+            presenter.loadOrders()
+    }
+    override fun onOrderSelected(items: Items) {
+        val bundle = Bundle().apply {
+            putSerializable("items",items)
+        }
+
+        router.navigateTo(Screen.infoScreen(bundle))
     }
 
     override fun showData(list: List<Items>) {
         myAdapter?.addItems(list)
     }
 
-    override fun showDataInfo(list: List<ItemsInfo>) {
 
-    }
-
-    override fun showDataService(list: List<Services>?) {
-        TODO("Not yet implemented")
-    }
 
 
     override fun showError(error: String?) {
-
+        Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
     }
 
     override fun showProgress(): Boolean {
-        TODO("Not yet implemented")
+       // binding.loadingPbm.visibility = View.VISIBLE
+        return true
     }
 
     override fun hideProgress(): Boolean {
-        TODO("Not yet implemented")
+       return true
     }
 }
