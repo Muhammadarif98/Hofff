@@ -35,13 +35,17 @@ class MyAdapter (private val listener: OrderSelectListener ): RecyclerView.Adapt
             dateTv.text = model.date.format()
 
 
-            if (statusId.equals(8)){
-                statusSiv.setImageResource(R.color.red)
-            }else if(statusId.equals(1) or statusId.equals(2) or statusId.equals(7)){
-                statusSiv.setImageResource(R.color.green)
-            }else if(statusId.equals(3) or statusId.equals(4) or statusId.equals(5)) {
-                statusSiv.setImageResource(R.color.grey)
-            }
+                when {
+                    statusId == 8 -> {
+                        statusSiv.setImageResource(R.color.red)
+                    }
+                    (statusId == 1) or (statusId == 2) or (statusId == 7) -> {
+                        statusSiv.setImageResource(R.color.green)
+                    }
+                    (statusId == 3) or (statusId == 4) or (statusId == 5) -> {
+                        statusSiv.setImageResource(R.color.grey)
+                    }
+                }
         }
 
         }
@@ -51,7 +55,7 @@ class MyAdapter (private val listener: OrderSelectListener ): RecyclerView.Adapt
     var models: MutableList<Items> = ArrayList()
 
     fun addItems(models:  List<Items>) {
-        this.models.addAll(models!!)
+        this.models.addAll(models)
         notifyDataSetChanged()
     }
 

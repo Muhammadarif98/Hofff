@@ -22,10 +22,12 @@ class MainActivity :  AppCompatActivity() {
     lateinit var router: Router
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        HoffApp.INSTANCE.appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        HoffApp.INSTANCE.appComponent.inject(this)
+
         router.navigateTo(Screen.orderScreen())
     }
 

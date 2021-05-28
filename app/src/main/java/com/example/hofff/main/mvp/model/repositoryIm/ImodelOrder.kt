@@ -7,6 +7,6 @@ import io.reactivex.Single
 import retrofit2.Response
 
 interface ImodelOrder {
-    fun getBase(): Single<List<Items>>?
+    fun getBase(): Single<List<Items>>
 
 }

@@ -13,7 +13,7 @@ class MyAdapterInfo : RecyclerView.Adapter<MyHolderInfo>() {
 
 
     fun addItems(models: List<ItemsInfo>) {
-        this.models.addAll(models!!)
+        this.models.addAll(models)
         notifyDataSetChanged()
     }
 

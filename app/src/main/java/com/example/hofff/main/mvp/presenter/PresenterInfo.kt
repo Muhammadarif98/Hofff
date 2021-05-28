@@ -3,22 +3,26 @@ package com.example.hofff.main.mvp.presenter
 import com.example.hofff.main.mvp.model.data.BaseInfo
 import com.example.hofff.main.mvp.model.interactors.InfoInteractor
 import com.example.hofff.main.mvp.view.ViewInfo
+import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
-class PresenterInfo @Inject constructor(private val interactor: InfoInteractor): Presenter<ViewInfo>() {
+class PresenterInfo @Inject constructor(private val interactor: InfoInteractor) :
+    Presenter<ViewInfo>() {
 
     fun loadOrderInfo(itemsId: String) {
 
         subscriptions.add(
             interactor.getBaseInfo(itemsId)
+                .subscribeBy(
+                    onSuccess = { orderInfo ->
+                        showOrderInfo(orderInfo)
 
-                ?.doOnSuccess { orderInfo ->
-                    showOrderInfo(orderInfo)
-                }
-                ?.doOnError { e ->
-                    //viewState.showError(e.message ?: "Unknown error")
-                }
-                ?.subscribe()
+                    },
+                    onError = {
+                       // viewState.showError("Error")
+                    }
+
+                )
         )
     }
 

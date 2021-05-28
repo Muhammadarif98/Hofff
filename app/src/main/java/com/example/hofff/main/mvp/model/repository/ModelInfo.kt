@@ -9,9 +9,9 @@ import io.reactivex.schedulers.Schedulers
 class ModelInfo(private val mRestService : RestService) : ImodelInfo {
 
 
-    override fun getBaseInfo(id : String): Single<BaseInfo>? {
-        return mRestService?.getItemInfo(id)
-            ?.subscribeOn(Schedulers.io())
+    override fun getBaseInfo(id : String): Single<BaseInfo> {
+        return mRestService.getItemInfo(id)
+            .subscribeOn(Schedulers.io())
 
 
     }

@@ -5,5 +5,5 @@ import io.reactivex.Single
 import retrofit2.Response
 
 interface ImodelInfo {
-    fun getBaseInfo(id: String): Single<BaseInfo>?
+    fun getBaseInfo(id: String): Single<BaseInfo>
 }

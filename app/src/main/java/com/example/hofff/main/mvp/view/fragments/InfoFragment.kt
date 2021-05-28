@@ -15,6 +15,8 @@ import com.example.hofff.main.mvp.model.data.format
 import com.example.hofff.databinding.FragmentInfoBinding
 import com.example.hofff.main.HoffApp
 import com.example.hofff.main.mvp.model.data.*
+import com.example.hofff.main.mvp.model.interactors.InfoInteractor
+import com.example.hofff.main.mvp.model.repositoryIm.ImodelInfo
 import com.example.hofff.main.mvp.presenter.PresenterInfo
 import com.example.hofff.main.mvp.view.activities.MainActivity
 import com.example.hofff.main.mvp.view.adapters.MyAdapterInfo
@@ -26,7 +28,7 @@ import javax.inject.Inject
 class InfoFragment : MvpAppCompatFragment(), ViewInfo {
     private var _binding: FragmentInfoBinding? = null
     private val binding: FragmentInfoBinding get() = _binding!!
-    private var myAdapterInfo: MyAdapterInfo? = MyAdapterInfo()
+    private var myAdapterInfo: MyAdapterInfo = MyAdapterInfo()
     private var myAdapterServices: MyAdapterService = MyAdapterService()
 
     @Inject
@@ -42,9 +44,10 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
     lateinit var items: Items
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        HoffApp.INSTANCE.appComponent.inject(this)
         super.onCreate(savedInstanceState)
 
-        HoffApp.INSTANCE.appComponent.inject(this)
+
     }
 
     override fun onCreateView(
@@ -56,6 +59,15 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        with(arguments?.getSerializable("order") as? Items) {
+            if (this == null) {
+                router.exit()
+                Toast.makeText(requireContext(), "Нет Items-а в Bundle-е, нет экрана с информацией об Items-е. Всё просто", Toast.LENGTH_LONG).show()
+                return
+            }
+
+            items = this
+        }
 
         (requireActivity() as MainActivity).updateTitle(items.number)
 
@@ -74,11 +86,11 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
 
 
     override fun showDataInfo(list: List<ItemsInfo>) {
-        myAdapterInfo?.addItems(list)
+        myAdapterInfo.addItems(list)
     }
 
     override fun showDataService(list: List<Services>?) {
-        myAdapterServices?.addItems(list)
+        myAdapterServices.addItems(list)
     }
 
     override fun showContent() {
@@ -125,7 +137,7 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
         binding.totalSumTv.text = amount.total.toString()
     }
 
-    override fun showError(error: String?) {
+    override fun showError(error: String) {
         Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
     }
 

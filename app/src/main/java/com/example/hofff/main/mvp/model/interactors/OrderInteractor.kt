@@ -7,5 +7,5 @@ import javax.inject.Inject
 class OrderInteractor @Inject constructor (private val repository: ImodelOrder) {
 
     fun getBase() = repository.getBase()
-        ?.observeOn(AndroidSchedulers.mainThread())
+        .observeOn(AndroidSchedulers.mainThread())
 }

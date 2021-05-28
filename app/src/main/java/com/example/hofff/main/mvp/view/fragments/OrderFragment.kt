@@ -12,6 +12,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.hofff.databinding.FragmentOrderBinding
 import com.example.hofff.main.HoffApp
 import com.example.hofff.main.Screen
+
 import com.example.hofff.main.mvp.presenter.PresenterOrder
 import com.example.hofff.main.mvp.view.activities.MainActivity
 import com.example.hofff.main.mvp.view.adapters.MyAdapter
@@ -40,9 +41,10 @@ class OrderFragment : MvpAppCompatFragment(), ViewOrder,MyAdapter.OrderSelectLis
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        HoffApp.INSTANCE.appComponent.inject(this)
         super.onCreate(savedInstanceState)
 
-        HoffApp.INSTANCE.appComponent.inject(this)
+
     }
 
 
@@ -61,7 +63,7 @@ class OrderFragment : MvpAppCompatFragment(), ViewOrder,MyAdapter.OrderSelectLis
         binding.recycler.adapter = myAdapter
 
         if (myAdapter.itemCount == 0)
-            presenter.loadOrders()
+            presenter.loadData()
     }
     override fun onOrderSelected(items: Items) {
         val bundle = Bundle().apply {
@@ -72,13 +74,13 @@ class OrderFragment : MvpAppCompatFragment(), ViewOrder,MyAdapter.OrderSelectLis
     }
 
     override fun showData(list: List<Items>) {
-        myAdapter?.addItems(list)
+        myAdapter.addItems(list)
     }
 
 
 
 
-    override fun showError(error: String?) {
+    override fun showError(error: String) {
         Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
     }
 

@@ -9,5 +9,5 @@ class InfoInteractor @Inject constructor(private val repository: ImodelInfo) {
 
     fun getBaseInfo(id: String) =
         repository.getBaseInfo(id)
-            ?.observeOn(AndroidSchedulers.mainThread())
+            .observeOn(AndroidSchedulers.mainThread())
 }
