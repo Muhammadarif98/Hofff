@@ -77,19 +77,8 @@ class OrderFragment : MvpAppCompatFragment(), ViewOrder,MyAdapter.OrderSelectLis
         myAdapter.addItems(list)
     }
 
-
-
-
     override fun showError(error: String) {
         Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
     }
 
-//    override fun showProgress(): Boolean {
-//       // binding.loadingPbm.visibility = View.VISIBLE
-//        return true
-//    }
-//
-//    override fun hideProgress(): Boolean {
-//       return true
-//    }
 }
