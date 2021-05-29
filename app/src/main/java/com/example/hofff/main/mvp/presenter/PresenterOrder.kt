@@ -1,11 +1,12 @@
 package com.example.hofff.main.mvp.presenter
 
-import android.util.Log
+
+import com.arellomobile.mvp.InjectViewState
 import com.example.hofff.main.mvp.model.interactors.OrderInteractor
 import com.example.hofff.main.mvp.view.ViewOrder
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
-
+@InjectViewState
 class PresenterOrder @Inject constructor(private val interactor: OrderInteractor) :
     Presenter<ViewOrder>() {
 
@@ -17,7 +18,7 @@ class PresenterOrder @Inject constructor(private val interactor: OrderInteractor
                         viewState.showData(items)
                     },
                     onError = {
-//                        viewState.showError("Error")
+                        viewState.showError("Error")
                     }
 
                 )

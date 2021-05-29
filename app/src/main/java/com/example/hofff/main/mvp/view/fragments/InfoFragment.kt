@@ -141,15 +141,15 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
         Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
     }
 
-    override fun showProgress(): Boolean {
-        binding.loadingPb.visibility = View.VISIBLE
-        return true
-    }
-
-    override fun hideProgress(): Boolean {
-        binding.loadingPb.visibility = View.GONE
-        return true
-    }
+//    override fun showProgress(): Boolean {
+//        binding.loadingPb.visibility = View.VISIBLE
+//        return true
+//    }
+//
+//    override fun hideProgress(): Boolean {
+//        binding.loadingPb.visibility = View.GONE
+//        return true
+//    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -53,10 +53,16 @@ class MyAdapter (private val listener: OrderSelectListener ): RecyclerView.Adapt
 
 
     var models: MutableList<Items> = ArrayList()
-
+//    private val models by lazy {
+//        arrayListOf<Items>()
+//    }
     fun addItems(models:  List<Items>) {
-        this.models.addAll(models)
+        this.models.apply {
+            clear()
+            addAll(models)
+        }
         notifyDataSetChanged()
+
     }
 
 
@@ -67,9 +73,9 @@ class MyAdapter (private val listener: OrderSelectListener ): RecyclerView.Adapt
         holder.bind(models[position])
     }
 
-    override fun getItemCount(): Int {
-        return models.size
-    }
+    override fun getItemCount():
+            Int = models.size
+
     interface OrderSelectListener {
         fun onOrderSelected(items: Items)
     }

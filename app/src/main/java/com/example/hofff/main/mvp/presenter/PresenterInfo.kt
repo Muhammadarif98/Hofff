@@ -1,11 +1,13 @@
 package com.example.hofff.main.mvp.presenter
 
+import com.arellomobile.mvp.InjectViewState
 import com.example.hofff.main.mvp.model.data.BaseInfo
 import com.example.hofff.main.mvp.model.interactors.InfoInteractor
 import com.example.hofff.main.mvp.view.ViewInfo
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
+@InjectViewState
 class PresenterInfo @Inject constructor(private val interactor: InfoInteractor) :
     Presenter<ViewInfo>() {
 
