@@ -76,7 +76,6 @@
                             android:layout_height="wrap_content"
                             tools:text="В работе"
                             tools:textColor="@color/green"
-                            android:textColor="@color/black"
                             android:layout_marginTop="4dp"/>
 
                     </LinearLayout>
@@ -93,11 +92,6 @@
                         android:orientation="vertical"
                         android:layout_marginHorizontal="@dimen/order_info_margin_horizontal">
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginVertical="16dp"
-                            android:background="@color/light_grey" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -116,13 +110,8 @@
                     </LinearLayout>
 
                 </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="16dp"
-                    android:background="@color/light_grey"
-                    android:visibility="gone"
-                    tools:visibility="visible" />
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -210,7 +199,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:textColor="@color/black"
+                            android:textColor="@color/blue"
                             tools:text="Москва, ул. Ленина, д. 10, кв. 10" />
 
                     </LinearLayout>
@@ -246,6 +235,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
                         android:layout_marginHorizontal="@dimen/order_info_margin_horizontal"
                         android:orientation="vertical">
 
@@ -288,7 +278,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Hoff Автозаводская"
+                            tools:text="Hoff Автозаводская"
                             android:textColor="@color/black" />
 
                     </LinearLayout>
@@ -339,7 +329,7 @@
                     android:background="@color/white"
                     tools:listitem="@layout/service_item_list"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="3"/>
+                    tools:itemCount="2"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -361,8 +351,7 @@
                         android:id="@+id/bonuses_ll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="bottom"
-                        android:visibility="visible">
+                        android:gravity="bottom">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -385,11 +374,6 @@
                             tools:text="-350"
                             android:textColor="@color/medium_gray"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=" ₽"
-                            android:textColor="@color/medium_gray"/>
 
                     </LinearLayout>
 
@@ -421,11 +405,6 @@
                             tools:text="-600"
                             android:textColor="@color/medium_gray"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=" ₽"
-                            android:textColor="@color/medium_gray"/>
 
                     </LinearLayout>
 
@@ -452,12 +431,6 @@
                             tools:text="60 647"
                             style="@style/Base.Widget.AppCompat.TextView.BlackBold"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=" ₽"
-                            style="@style/Base.Widget.AppCompat.TextView.BlackBold"/>
-
                     </LinearLayout>
 
                 </LinearLayout>
@@ -466,14 +439,14 @@
                     android:id="@+id/items_count_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="23 товара"
+                    android:text="@string/_2"
                     style="@style/Base.Widget.AppCompat.TextView.BlackBold"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="16dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/items_list_rv"
+                    android:id="@+id/items_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
@@ -485,16 +458,6 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
-
-        <ProgressBar
-            android:id="@+id/loading_pb"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:indeterminateTint="@color/red"
-            android:visibility="gone"/>
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

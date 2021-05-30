@@ -2,6 +2,7 @@
     <string name="app_name">Hofff</string>
     <string name="ruble">%1$s ₽</string>
     <string name="shtuk">%1$s шт</string>
-    <string name="total">%1$s товара</string>
+    <string name="total">%1$s товар(а)</string>
+    <string name="_2">2 товара</string>
 
 </resources>

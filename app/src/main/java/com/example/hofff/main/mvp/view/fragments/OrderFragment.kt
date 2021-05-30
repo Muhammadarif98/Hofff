@@ -23,8 +23,8 @@ import javax.inject.Inject
 
 class OrderFragment : MvpAppCompatFragment(), ViewOrder,MyAdapter.OrderSelectListener{
 
-    private var _binding: FragmentOrderBinding? = null
-    private val binding: FragmentOrderBinding get() = _binding!!
+    private var bind: FragmentOrderBinding? = null
+    private val binding: FragmentOrderBinding get() = bind!!
 
     private val myAdapter = MyAdapter(this)
 
@@ -51,7 +51,7 @@ class OrderFragment : MvpAppCompatFragment(), ViewOrder,MyAdapter.OrderSelectLis
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? { _binding = FragmentOrderBinding.inflate(inflater, container, false)
+    ): View? { bind = FragmentOrderBinding.inflate(inflater, container, false)
         return binding.root
 
     }

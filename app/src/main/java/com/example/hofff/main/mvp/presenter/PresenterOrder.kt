@@ -18,7 +18,7 @@ class PresenterOrder @Inject constructor(private val interactor: OrderInteractor
                         viewState.showData(items)
                     },
                     onError = {
-                        viewState.showError("Error")
+                        viewState.showError("Error, don't found network")
                     }
 
                 )

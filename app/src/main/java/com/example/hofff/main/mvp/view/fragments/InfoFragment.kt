@@ -1,16 +1,21 @@
 package com.example.hofff.main.mvp.view.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.blue
+import androidx.core.graphics.green
+import androidx.core.graphics.red
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.example.hofff.R
 import com.example.hofff.main.mvp.model.data.format
 import com.example.hofff.databinding.FragmentInfoBinding
 import com.example.hofff.main.HoffApp
@@ -56,10 +61,7 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        savedInstanceState?.apply {
-            getSerializable("items")
 
-        }
         with(arguments?.getSerializable("items") as? Items) {
             if (this == null) {
                 router.exit()
@@ -72,18 +74,9 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
         (requireActivity() as MainActivity).updateTitle(items.number)
 
         presenter.loadOrderInfo(items.id)
-
-        val dividerItemDecoration = DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
-
-        binding.servicesRecycler.addItemDecoration(dividerItemDecoration)
         binding.servicesRecycler.adapter = myAdapterServices
-
-        binding.itemsListRv.addItemDecoration(dividerItemDecoration)
-        binding.itemsListRv.adapter = myAdapterInfo
+        binding.itemsRecycler.adapter = myAdapterInfo
     }
-
-
-
 
     override fun showDataInfo(list: List<ItemsInfo>) {
         myAdapterInfo.addItems(list)
@@ -93,8 +86,21 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
         myAdapterServices.addItems(list)
     }
 
-    override fun showContent() {
-        binding.orderInfoContent.visibility = View.VISIBLE
+    override fun showStatus() {
+        when {
+            items.status.id == 8 -> {
+               // binding.statusTv.setTextColor(Color.RED)
+                binding.statusTv.textColors.defaultColor.red
+            }
+            (items.status.id==1) or (items.status.id==2) or (items.status.id==7) -> {
+                //binding.statusTv.setTextColor(Color.GREEN)
+                binding.statusTv.textColors.defaultColor.green
+            }
+            (items.status.id==3) or (items.status.id==4) or (items.status.id==5) -> {
+               // binding.statusTv.setTextColor(Color.GRAY)
+                binding.statusTv.textColors.defaultColor.blue
+            }
+        }
     }
 
     override fun showTopOrderInfo() {
@@ -103,31 +109,26 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
         binding.deliveryTv.text = items.delivery.name
     }
 
-    override fun showDeliveryTime(deliveryTime: DeliveryTime) {
-        binding.deliveryDateTv.text = deliveryTime.data
-        binding.deliveryTimeTv.text = deliveryTime.data
-    }
-
     override fun showAddress(address: String) {
         if (items.delivery.name.contains("Самовывоз")) {
             binding.addressTitleTv.text = "Адрес пункта выдачи"
-            binding.addressTv.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.holo_blue_dark))
         }
-
         binding.addressTv.text = address
     }
 
-    override fun showOtherCenterInfo(itemsInfo: BaseInfo) {
+    override fun showInfo(itemsInfo: BaseInfo) {
         binding.paymentTv.text = itemsInfo.payment.payment.orEmpty()
         binding.bonusCardTv.text = itemsInfo.bonusCard
         binding.shopTv.text = itemsInfo.shop.name.orEmpty()
+        binding.itemsCountTv.text = binding.itemsCountTv.context.
+          getString(R.string.total, itemsInfo.totalItemCount.toString())
     }
 
     override fun showOrderSum(amount: Amount) {
-            binding.bonusesLl.visibility = View.VISIBLE
-            binding.bonusesTv.text = amount.bonuses.toString()
-            binding.discountTv.text = amount.discount.toString()
-            binding.totalSumTv.text = amount.total.toString()
+            binding.bonusesTv.text = binding.bonusesTv.context.getString(R.string.ruble, amount.bonuses.toString())
+            binding.discountTv.text = binding.discountTv.context.getString(R.string.ruble, amount.discount.toString())
+            binding.totalSumTv.text = binding.totalSumTv.context.getString(R.string.ruble, amount.total.toString())
+
     }
 
     override fun showError(error: String) {

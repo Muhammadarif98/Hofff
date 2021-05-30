@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.hofff.R
+import com.example.hofff.main.mvp.model.data.BaseInfo
 
 class MyHolderInfo (itemView: View) : RecyclerView.ViewHolder(itemView){
 
@@ -17,13 +18,18 @@ class MyHolderInfo (itemView: View) : RecyclerView.ViewHolder(itemView){
     var mData: TextView = itemView.findViewById(R.id.quantity_tv)
 
 
+
     fun bind(model: ItemsInfo){
         mDeliveryT.text = model.name
         mStatus.text = model.articul.toString()
         mData.text = mData.context.getString(R.string.shtuk,model.quantity.toString())
         mDelivery.load(model.imageUrl)
         mPrice.text = mPrice.context.getString(R.string.ruble, model.price.toString())
+
+
+
     }
+
 
 
 

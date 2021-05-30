@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hofff.R
+import com.example.hofff.main.mvp.model.data.BaseInfo
 import java.util.*
 
 class MyAdapterInfo : RecyclerView.Adapter<MyHolderInfo>() {
     var models: MutableList<ItemsInfo> = ArrayList()
+    var base: MutableList<BaseInfo> = ArrayList()
 
 
     fun addItems(models: List<ItemsInfo>) {
@@ -26,6 +28,7 @@ class MyAdapterInfo : RecyclerView.Adapter<MyHolderInfo>() {
 
     override fun onBindViewHolder(holder: MyHolderInfo, position: Int) {
         holder.bind(models[position])
+
 
     }
 

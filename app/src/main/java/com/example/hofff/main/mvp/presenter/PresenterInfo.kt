@@ -21,7 +21,7 @@ class PresenterInfo @Inject constructor(private val interactor: InfoInteractor) 
 
                     },
                     onError = {
-                       // viewState.showError("Error")
+                        viewState.showError("Error")
                     }
 
                 )
@@ -29,15 +29,12 @@ class PresenterInfo @Inject constructor(private val interactor: InfoInteractor) 
     }
 
     private fun showOrderInfo(baseInfo: BaseInfo) {
-        viewState.showContent()
 
         viewState.showTopOrderInfo()
 
-        viewState.showDeliveryTime(baseInfo.deliveryTime)
-
         viewState.showAddress(baseInfo.address)
 
-        viewState.showOtherCenterInfo(baseInfo)
+        viewState.showInfo(baseInfo)
 
         viewState.showOrderSum(baseInfo.amount)
 
@@ -46,9 +43,4 @@ class PresenterInfo @Inject constructor(private val interactor: InfoInteractor) 
         viewState.showDataInfo(baseInfo.itemsInfo)
     }
 
-//    override fun onStop() {
-//        if (!mDisposable!!.isDisposed) {
-//            mDisposable!!.dispose()
-//        }
-//    }
 }

@@ -15,7 +15,7 @@ import javax.inject.Singleton
     NetworkApiModule::class,
     LocalNavigationModule::class]
 )
-interface ApplicationComponent {
+interface AppComponent {
 
     fun inject(orderFragment: OrderFragment)
 

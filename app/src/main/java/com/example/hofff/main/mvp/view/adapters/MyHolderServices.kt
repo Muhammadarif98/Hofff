@@ -18,7 +18,6 @@ class MyHolderServices (itemView: View) : RecyclerView.ViewHolder(itemView){
 
 
     fun bind(model: Services){
-
         mDeliveryT.text = model.name
         mDelivery.load(model.icon)
         mPrice.text = mPrice.context.getString(R.string.ruble, model.price.toString())

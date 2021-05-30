@@ -53,9 +53,7 @@ class MyAdapter (private val listener: OrderSelectListener ): RecyclerView.Adapt
 
 
     var models: MutableList<Items> = ArrayList()
-//    private val models by lazy {
-//        arrayListOf<Items>()
-//    }
+
     fun addItems(models:  List<Items>) {
         this.models.apply {
             clear()
