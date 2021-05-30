@@ -302,6 +302,7 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/red"
                         android:text="Повторить заказ"
+                        android:textColor="@color/white"
                         android:textAllCaps="false" />
 
                     <TextView
