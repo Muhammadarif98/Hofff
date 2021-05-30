@@ -6,6 +6,7 @@ import com.example.hofff.main.mvp.model.interactors.OrderInteractor
 import com.example.hofff.main.mvp.view.ViewOrder
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
+
 @InjectViewState
 class PresenterOrder @Inject constructor(private val interactor: OrderInteractor) :
     Presenter<ViewOrder>() {
@@ -20,9 +21,7 @@ class PresenterOrder @Inject constructor(private val interactor: OrderInteractor
                     onError = {
                         viewState.showError("Error, don't found network")
                     }
-
                 )
         )
     }
-
 }

@@ -23,23 +23,17 @@ class PresenterInfo @Inject constructor(private val interactor: InfoInteractor) 
                     onError = {
                         viewState.showError("Error")
                     }
-
                 )
         )
     }
 
     private fun showOrderInfo(baseInfo: BaseInfo) {
-
         viewState.showTopOrderInfo()
-
+        viewState.showStatus()
         viewState.showAddress(baseInfo.address)
-
         viewState.showInfo(baseInfo)
-
         viewState.showOrderSum(baseInfo.amount)
-
         viewState.showDataService(baseInfo.services)
-
         viewState.showDataInfo(baseInfo.itemsInfo)
     }
 

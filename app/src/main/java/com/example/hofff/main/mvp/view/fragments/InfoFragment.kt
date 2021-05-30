@@ -1,5 +1,6 @@
 package com.example.hofff.main.mvp.view.fragments
 
+import android.app.ActionBar
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ import com.example.hofff.R
 import com.example.hofff.main.mvp.model.data.format
 import com.example.hofff.databinding.FragmentInfoBinding
 import com.example.hofff.main.HoffApp
+import com.example.hofff.main.Screen
 import com.example.hofff.main.mvp.model.data.*
 import com.example.hofff.main.mvp.presenter.PresenterInfo
 import com.example.hofff.main.mvp.view.activities.MainActivity
@@ -27,6 +29,7 @@ import com.example.hofff.main.mvp.view.adapters.MyAdapterService
 import com.example.hofff.main.mvp.view.ViewInfo
 import com.github.terrakok.cicerone.Router
 import javax.inject.Inject
+import kotlin.concurrent.timerTask
 
 class InfoFragment : MvpAppCompatFragment(), ViewInfo {
     private var bind: FragmentInfoBinding? = null
@@ -56,9 +59,11 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? { bind = FragmentInfoBinding.inflate(inflater, container, false)
+    ): View? {
+        bind = FragmentInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -73,10 +78,15 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
 
         (requireActivity() as MainActivity).updateTitle(items.number)
 
+
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).supportActionBar?.setHomeButtonEnabled(true)
+
         presenter.loadOrderInfo(items.id)
         binding.servicesRecycler.adapter = myAdapterServices
         binding.itemsRecycler.adapter = myAdapterInfo
     }
+
 
     override fun showDataInfo(list: List<ItemsInfo>) {
         myAdapterInfo.addItems(list)
@@ -89,16 +99,13 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
     override fun showStatus() {
         when {
             items.status.id == 8 -> {
-               // binding.statusTv.setTextColor(Color.RED)
-                binding.statusTv.textColors.defaultColor.red
+                binding.statusTv.setTextColor(Color.RED)
             }
-            (items.status.id==1) or (items.status.id==2) or (items.status.id==7) -> {
-                //binding.statusTv.setTextColor(Color.GREEN)
-                binding.statusTv.textColors.defaultColor.green
+            (items.status.id == 1) or (items.status.id == 2) or (items.status.id == 7) -> {
+                binding.statusTv.setTextColor(Color.GREEN)
             }
-            (items.status.id==3) or (items.status.id==4) or (items.status.id==5) -> {
-               // binding.statusTv.setTextColor(Color.GRAY)
-                binding.statusTv.textColors.defaultColor.blue
+            (items.status.id == 3) or (items.status.id == 4) or (items.status.id == 5) -> {
+                binding.statusTv.setTextColor(Color.GRAY)
             }
         }
     }
@@ -120,14 +127,19 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
         binding.paymentTv.text = itemsInfo.payment.payment.orEmpty()
         binding.bonusCardTv.text = itemsInfo.bonusCard
         binding.shopTv.text = itemsInfo.shop.name.orEmpty()
-        binding.itemsCountTv.text = binding.itemsCountTv.context.
-          getString(R.string.total, itemsInfo.totalItemCount.toString())
+        binding.itemsCountTv.text = binding.itemsCountTv.context.getString(
+            R.string.total,
+            itemsInfo.totalItemCount.toString()
+        )
     }
 
     override fun showOrderSum(amount: Amount) {
-            binding.bonusesTv.text = binding.bonusesTv.context.getString(R.string.ruble, amount.bonuses.toString())
-            binding.discountTv.text = binding.discountTv.context.getString(R.string.ruble, amount.discount.toString())
-            binding.totalSumTv.text = binding.totalSumTv.context.getString(R.string.ruble, amount.total.toString())
+        binding.bonusesTv.text =
+            binding.bonusesTv.context.getString(R.string.ruble, amount.bonuses.toString())
+        binding.discountTv.text =
+            binding.discountTv.context.getString(R.string.ruble, amount.discount.toString())
+        binding.totalSumTv.text =
+            binding.totalSumTv.context.getString(R.string.ruble, amount.total.toString())
 
     }
 
@@ -140,3 +152,4 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
         bind = null
     }
 }
+

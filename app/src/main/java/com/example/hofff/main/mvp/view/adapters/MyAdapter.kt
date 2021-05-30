@@ -11,9 +11,11 @@ import com.example.hofff.R
 import com.example.hofff.databinding.ItemListBinding
 import java.util.*
 
-class MyAdapter (private val listener: OrderSelectListener ): RecyclerView.Adapter<MyAdapter.MyHolder>() {
+class MyAdapter(private val listener: OrderSelectListener) :
+    RecyclerView.Adapter<MyAdapter.MyHolder>() {
 
-    inner class MyHolder (private val binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class MyHolder(private val binding: ItemListBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
 
         init {
@@ -23,16 +25,16 @@ class MyAdapter (private val listener: OrderSelectListener ): RecyclerView.Adapt
             }
         }
 
-        fun bind(model: Items){
-            with(binding){
-            val id = model.id
-            numberTv.text = model.number
-            statusTv.text = model.status.name
-            val statusId = model.status.id
-            deliveryTv.text = model.delivery.name
-            deliveryIv.load(model.delivery.icon)
-            priceTv.text = priceTv.context.getString(R.string.ruble, model.sum.toString())
-            dateTv.text = model.date.format()
+        fun bind(model: Items) {
+            with(binding) {
+                val id = model.id
+                numberTv.text = model.number
+                statusTv.text = model.status.name
+                val statusId = model.status.id
+                deliveryTv.text = model.delivery.name
+                deliveryIv.load(model.delivery.icon)
+                priceTv.text = priceTv.context.getString(R.string.ruble, model.sum.toString())
+                dateTv.text = model.date.format()
 
 
                 when {
@@ -46,7 +48,7 @@ class MyAdapter (private val listener: OrderSelectListener ): RecyclerView.Adapt
                         statusSiv.setImageResource(R.color.grey)
                     }
                 }
-        }
+            }
 
         }
     }
@@ -54,7 +56,7 @@ class MyAdapter (private val listener: OrderSelectListener ): RecyclerView.Adapt
 
     var models: MutableList<Items> = ArrayList()
 
-    fun addItems(models:  List<Items>) {
+    fun addItems(models: List<Items>) {
         this.models.apply {
             clear()
             addAll(models)

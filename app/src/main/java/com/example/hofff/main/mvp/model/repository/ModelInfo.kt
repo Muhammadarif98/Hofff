@@ -6,10 +6,10 @@ import com.example.hofff.main.mvp.model.network.RestService
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
-class ModelInfo(private val mRestService : RestService) : ImodelInfo {
+class ModelInfo(private val mRestService: RestService) : ImodelInfo {
 
 
-    override fun getBaseInfo(id : String): Single<BaseInfo> {
+    override fun getBaseInfo(id: String): Single<BaseInfo> {
         return mRestService.getItemInfo(id)
             .subscribeOn(Schedulers.io())
 

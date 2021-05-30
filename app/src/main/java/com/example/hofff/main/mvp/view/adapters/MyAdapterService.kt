@@ -13,14 +13,14 @@ class MyAdapterService : RecyclerView.Adapter<MyHolderServices>() {
 
     fun addItems(models: List<Services>?) {
         if (models != null) {
-        this.models.addAll(models!!)
+            this.models.addAll(models!!)
         }
         notifyDataSetChanged()
     }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolderServices {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.service_item_list,null)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.service_item_list, null)
         return MyHolderServices(view)
     }
 

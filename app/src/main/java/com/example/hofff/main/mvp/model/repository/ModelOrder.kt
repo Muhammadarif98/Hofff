@@ -11,7 +11,6 @@ import javax.inject.Inject
 class ModelOrder @Inject constructor(
     private val mRestService: RestService,
     private val itemsMapper: ItemsMapper,
-
 ) : ImodelOrder {
 
 

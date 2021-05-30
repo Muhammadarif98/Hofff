@@ -7,19 +7,15 @@ import com.example.hofff.main.dagger.DaggerAppComponent
 
 class HoffApp : Application() {
 
-    val appComponent : AppComponent = DaggerAppComponent.create()
-
+    val appComponent: AppComponent = DaggerAppComponent.create()
 
     override fun onCreate() {
         INSTANCE = this
         super.onCreate()
-
     }
 
     companion object {
-        lateinit var INSTANCE : HoffApp
+        lateinit var INSTANCE: HoffApp
             private set
     }
-
-
 }

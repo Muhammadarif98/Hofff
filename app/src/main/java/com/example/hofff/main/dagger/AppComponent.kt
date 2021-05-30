@@ -8,12 +8,13 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-    NavigationModule::class,
-    InfoModule::class,
-    OrdersModule::class,
-    NetworkApiModule::class,
-    LocalNavigationModule::class]
+@Component(
+    modules = [
+        NavigationModule::class,
+        InfoModule::class,
+        OrdersModule::class,
+        NetworkApiModule::class,
+        LocalNavigationModule::class]
 )
 interface AppComponent {
 

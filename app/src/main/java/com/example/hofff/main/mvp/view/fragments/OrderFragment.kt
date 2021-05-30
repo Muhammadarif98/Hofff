@@ -21,7 +21,7 @@ import com.github.terrakok.cicerone.Router
 import javax.inject.Inject
 
 
-class OrderFragment : MvpAppCompatFragment(), ViewOrder,MyAdapter.OrderSelectListener{
+class OrderFragment : MvpAppCompatFragment(), ViewOrder, MyAdapter.OrderSelectListener {
 
     private var bind: FragmentOrderBinding? = null
     private val binding: FragmentOrderBinding get() = bind!!
@@ -51,23 +51,27 @@ class OrderFragment : MvpAppCompatFragment(), ViewOrder,MyAdapter.OrderSelectLis
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? { bind = FragmentOrderBinding.inflate(inflater, container, false)
+    ): View? {
+        bind = FragmentOrderBinding.inflate(inflater, container, false)
         return binding.root
 
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         (requireActivity() as MainActivity).updateTitle("Мои заказы")
 
         binding.recycler.adapter = myAdapter
-
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        (activity as MainActivity).supportActionBar?.setHomeButtonEnabled(false)
         if (myAdapter.itemCount == 0)
             presenter.loadData()
     }
+
     override fun onOrderSelected(items: Items) {
         val bundle = Bundle().apply {
-            putSerializable("items",items)
+            putSerializable("items", items)
         }
 
         router.navigateTo(Screen.infoScreen(bundle))
