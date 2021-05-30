@@ -3,6 +3,7 @@ package com.example.hofff.main.mvp.view.fragments
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -12,6 +13,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.hofff.R
 import com.example.hofff.databinding.FragmentInfoBinding
 import com.example.hofff.main.HoffApp
+import com.example.hofff.main.Screen
 import com.example.hofff.main.mvp.model.data.*
 import com.example.hofff.main.mvp.presenter.PresenterInfo
 import com.example.hofff.main.mvp.view.ViewInfo
@@ -20,6 +22,7 @@ import com.example.hofff.main.mvp.view.adapters.MyAdapterInfo
 import com.example.hofff.main.mvp.view.adapters.MyAdapterService
 import com.github.terrakok.cicerone.Router
 import javax.inject.Inject
+
 
 class InfoFragment : MvpAppCompatFragment(), ViewInfo {
     private var bind: FragmentInfoBinding? = null
@@ -64,17 +67,37 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
             items = this
         }
 
-        (requireActivity() as MainActivity).uTitle(items.number)
 
+
+        (requireActivity() as MainActivity).uTitle(items.number)
 
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as MainActivity).supportActionBar?.setHomeButtonEnabled(true)
+        setHasOptionsMenu(true)
 
         presenter.loadOrderInfo(items.id)
         binding.servicesRecycler.adapter = myAdapterServices
         binding.itemsRecycler.adapter = myAdapterInfo
+
+
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                val bundle = Bundle().apply {
+                }
+                router.navigateTo(Screen.backScreen(bundle))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun onOrderSelected() {
+
+
+    }
 
     override fun showDataInfo(list: List<ItemsInfo>) {
         myAdapterInfo.addItems(list)

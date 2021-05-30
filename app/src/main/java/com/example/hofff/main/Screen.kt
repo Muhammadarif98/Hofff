@@ -14,5 +14,10 @@ object Screen {
             arguments = bundle
         }
     }
+    fun backScreen(bundle: Bundle) = FragmentScreen {
+        OrderFragment().apply {
+            arguments = bundle
+        }
+    }
 
 }
