@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- com.example.hofff.main.mvp.model.data.Base application theme. -->
-    <style name="Theme.Hofff" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+    <style name="Theme.Hofff" parent="Theme.AppCompat.Light">
+              <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/purple_500</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -11,10 +11,10 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- com.example.hofff.main.mvp.model.data.Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+
     </style>
 
-
+    <!-- Customize your theme here. -->
     <style name="Base.Widget.AppCompat.TextView.BlackBold">
         <item name="android:textSize">18dp</item>
         <item name="android:textColor">@color/black</item>

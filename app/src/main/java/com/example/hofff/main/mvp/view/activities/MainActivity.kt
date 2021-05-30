@@ -2,6 +2,7 @@ package com.example.hofff.main.mvp.view.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.hofff.R
 import com.example.hofff.main.HoffApp
 import com.example.hofff.main.Screen
@@ -28,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         router.navigateTo(Screen.orderScreen())
-
     }
 
     override fun onResumeFragments() {

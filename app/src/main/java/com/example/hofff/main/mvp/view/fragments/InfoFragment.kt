@@ -13,7 +13,6 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.hofff.R
 import com.example.hofff.databinding.FragmentInfoBinding
 import com.example.hofff.main.HoffApp
-import com.example.hofff.main.Screen
 import com.example.hofff.main.mvp.model.data.*
 import com.example.hofff.main.mvp.presenter.PresenterInfo
 import com.example.hofff.main.mvp.view.ViewInfo
@@ -87,7 +86,8 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
             android.R.id.home -> {
                 val bundle = Bundle().apply {
                 }
-                router.navigateTo(Screen.backScreen(bundle))
+                activity?.onBackPressed()
+                //router.navigateTo(Screen.backScreen(bundle))
                 true
             }
             else -> super.onOptionsItemSelected(item)
