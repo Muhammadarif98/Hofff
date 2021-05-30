@@ -28,11 +28,11 @@ class PresenterInfo @Inject constructor(private val interactor: InfoInteractor) 
     }
 
     private fun showOrderInfo(baseInfo: BaseInfo) {
-        viewState.showTopOrderInfo()
+        viewState.showInfoTwo()
         viewState.showStatus()
         viewState.showAddress(baseInfo.address)
         viewState.showInfo(baseInfo)
-        viewState.showOrderSum(baseInfo.amount)
+        viewState.showSum(baseInfo.amount)
         viewState.showDataService(baseInfo.services)
         viewState.showDataInfo(baseInfo.itemsInfo)
     }

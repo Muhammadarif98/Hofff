@@ -2,7 +2,6 @@ package com.example.hofff.main.mvp.view.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import com.example.hofff.R
 import com.example.hofff.main.HoffApp
 import com.example.hofff.main.Screen
@@ -17,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     private val navigator = AppNavigator(this, R.id.fragment_container)
 
     @Inject
-    lateinit var navigatorHolder: NavigatorHolder
+    lateinit var navHolder: NavigatorHolder
 
     @Inject
     lateinit var router: Router
@@ -32,18 +31,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     override fun onResumeFragments() {
         super.onResumeFragments()
-        navigatorHolder.setNavigator(navigator)
+        navHolder.setNavigator(navigator)
     }
 
     override fun onPause() {
-        navigatorHolder.removeNavigator()
+        navHolder.removeNavigator()
         super.onPause()
     }
-
-    fun updateTitle(title: String) {
+    fun uTitle(title: String) {
         supportActionBar?.title = title
     }
 }

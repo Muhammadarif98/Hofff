@@ -1,35 +1,25 @@
 package com.example.hofff.main.mvp.view.fragments
 
-import android.app.ActionBar
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.blue
-import androidx.core.graphics.green
-import androidx.core.graphics.red
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.hofff.R
-import com.example.hofff.main.mvp.model.data.format
 import com.example.hofff.databinding.FragmentInfoBinding
 import com.example.hofff.main.HoffApp
-import com.example.hofff.main.Screen
 import com.example.hofff.main.mvp.model.data.*
 import com.example.hofff.main.mvp.presenter.PresenterInfo
+import com.example.hofff.main.mvp.view.ViewInfo
 import com.example.hofff.main.mvp.view.activities.MainActivity
 import com.example.hofff.main.mvp.view.adapters.MyAdapterInfo
 import com.example.hofff.main.mvp.view.adapters.MyAdapterService
-import com.example.hofff.main.mvp.view.ViewInfo
 import com.github.terrakok.cicerone.Router
 import javax.inject.Inject
-import kotlin.concurrent.timerTask
 
 class InfoFragment : MvpAppCompatFragment(), ViewInfo {
     private var bind: FragmentInfoBinding? = null
@@ -52,8 +42,6 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
     override fun onCreate(savedInstanceState: Bundle?) {
         HoffApp.INSTANCE.appComponent.inject(this)
         super.onCreate(savedInstanceState)
-
-
     }
 
     override fun onCreateView(
@@ -76,7 +64,7 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
             items = this
         }
 
-        (requireActivity() as MainActivity).updateTitle(items.number)
+        (requireActivity() as MainActivity).uTitle(items.number)
 
 
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -110,7 +98,7 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
         }
     }
 
-    override fun showTopOrderInfo() {
+    override fun showInfoTwo() {
         binding.orderDateTv.text = items.date.format()
         binding.statusTv.text = items.status.name
         binding.deliveryTv.text = items.delivery.name
@@ -133,7 +121,7 @@ class InfoFragment : MvpAppCompatFragment(), ViewInfo {
         )
     }
 
-    override fun showOrderSum(amount: Amount) {
+    override fun showSum(amount: Amount) {
         binding.bonusesTv.text =
             binding.bonusesTv.context.getString(R.string.ruble, amount.bonuses.toString())
         binding.discountTv.text =

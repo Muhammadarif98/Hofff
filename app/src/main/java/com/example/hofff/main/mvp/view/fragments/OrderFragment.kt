@@ -60,7 +60,7 @@ class OrderFragment : MvpAppCompatFragment(), ViewOrder, MyAdapter.OrderSelectLi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (requireActivity() as MainActivity).updateTitle("Мои заказы")
+        (requireActivity() as MainActivity).uTitle("Мои заказы")
 
         binding.recycler.adapter = myAdapter
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
