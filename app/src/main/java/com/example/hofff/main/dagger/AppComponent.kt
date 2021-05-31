@@ -1,9 +1,9 @@
 package com.example.hofff.main.dagger
 
 import com.example.hofff.main.dagger.module.*
-import com.example.hofff.main.mvp.view.fragments.InfoFragment
-import com.example.hofff.main.mvp.view.fragments.OrderFragment
-import com.example.hofff.main.mvp.view.activities.MainActivity
+import com.example.hofff.main.presentation.fragments.InfoFragment
+import com.example.hofff.main.presentation.fragments.OrderFragment
+import com.example.hofff.main.presentation.activities.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 

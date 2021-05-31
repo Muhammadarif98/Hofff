@@ -1,7 +1,6 @@
 package com.example.hofff.main.dagger.module
 
-
-import com.example.hofff.main.mvp.model.network.RestService
+import com.example.hofff.main.data.retrofitService.RestService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
